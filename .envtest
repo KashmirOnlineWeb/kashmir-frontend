@@ -1,0 +1,18 @@
+# Configure environment variables
+
+# Database
+# Please use a working DATABASE_URL. Otherwise, Next.js build will timeout and you will get the following error: "because it took more than 60 seconds"
+# DATABASE_URL=libsql://[RANDOM-CHARS]-[DB-NAME]-[ORG-NAME].turso.io
+# DATABASE_URL=http://localhost:3000/
+
+# Clerk authentication
+
+NEXTAUTH_URL="http://13.234.18.217/"
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
+GOOGLE_ID = 85352750072-8e19s1ch0u64agckigmicff0gjt9h9mu.apps.googleusercontent.com
+GOOGLE_SECRET = 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
+NEXT_PUBLIC_CLERK_API_URL=http://3.110.135.186:8080/
+SENDGRID_API_KEY=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

@@ -1,0 +1,461 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Helvetica:wght@300&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  @apply leading-[normal] m-0;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+*,
+::before,
+::after {
+  border-width: 0;
+}
+input[type="radio"]:checked + span {
+  display: block;
+}
+svg.iconify.iconify--mingcute {
+  width: 48px;
+  height: 48px;
+}
+.bg-icon {
+  background: rgba(0, 34, 204, 0.10);
+}
+.iconify--maki {
+  color: #0022CC !important;
+}
+.swiper {
+  width: 100%;
+}
+.swiper-button-prev {
+  background-image: url("/assets/images/icons/arrow-left.svg") !important;
+  width: 22px !important;
+  height: 22px !important;
+  background-repeat: no-repeat;
+}
+.swiper .swiper-button-prev:hover {
+  background-image: url("/assets/images/icons/arrow-left-white.svg") !important;
+}
+.swiper .swiper-button-next:hover {
+  background-image: url("/assets/images/icons/arrow-right-white.svg") !important;
+}
+
+.swiper-button-next:before, .swiper-button-prev:before {
+  content: '';
+  display: block;
+  border: 3px solid #0022CC;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  position: absolute;
+  z-index: -1;
+}
+.social-section .swiper-button-next:before, .social-section .swiper-button-prev:before {
+  border: none;
+  background-color: #fff;
+}
+.swiper-button-next {
+  background-image: url("/assets/images/icons/arrow-right.svg") !important;
+  width: 22px !important;
+  height: 22px !important;
+  background-repeat: no-repeat;
+}
+.swiper-button-next:after, .swiper-button-prev:after {
+  content: '' !important;
+}
+
+.curated_packages .swiper-button-prev {
+  left: auto;
+  right: 70px;
+  top: -106px;
+}
+.curated_packages .swiper-button-next {
+  right: 0;
+  top: -106px;
+}
+body .right100px {
+  right: 100px;
+}
+.blog_arrows .swiper-button-prev, .blog_arrows .swiper-button-next {
+  bottom: 0;
+  top: auto;
+}
+.bg-mediumblue-400 {
+  background: rgba(0, 34, 204, 0.05);
+}
+.font-inter {
+  font-family: 'Inter';
+}
+.custom-height {
+  height: 12px !important;
+}
+.bg-overlay::after {
+  content: '';
+  background: #000000b3;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  border-radius: 22px;
+}
+.bg-overlay {
+  position: relative;
+}
+
+.discover{
+  cursor: pointer;
+  height: 72px;
+}
+.discover:hover .list{
+  display: block;
+}
+.list{
+  display: none;
+}
+.color--wedge {
+  /* color: #e00; */
+  color: #0000ff;
+}
+.color-pink{
+  color: #DD1045;
+}
+.custom-hover :hover a {
+  color: #DD1045 !important;
+}
+.bg-pinki{
+  color: #DD1045;
+}
+.custom-bg-pink {
+  background-color: #ffc0cb;
+}
+.backgroundcolor--wedge {
+  background: rgb(0, 34, 204);
+}
+.parallax-effect {
+  position: relative;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+.hoverUnderline {
+  position: relative;
+}
+.hoverUnderline::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 4px;
+  bottom: 0;
+  left: 0;
+  background-color: #e00; 
+  transition: width 0.3s ease;
+}
+.hoverUnderline:hover::before {
+  width: 100%;
+}
+.bgHoverRed:hover {
+  color: #DD1045;
+}
+.swiper-button-prev, .swiper-button-next {
+  z-index: 5 !important;
+}
+.container::-webkit-scrollbar {
+  display: none;
+}
+.ht_section .h-35 {
+  min-height: 34px;
+}
+.editor-imgMargin img{
+  margin-top: 20px;
+  margin-bottom: 20px; 
+}
+
+
+.floara-editor-ml-0 p{
+  margin-left: 0px !important;
+  font-size: 16px !important;
+  font-family: "Inter" !important;
+}
+.floara-editor-ml-0 p span{
+  font-size: 16px !important;
+  font-family: "Inter" !important;
+}
+
+.floara-editor-ml-0 ol{
+  padding-inline-start: 0px !important;
+}
+@media only screen and (min-width: 1180px) and (max-width: 1350px){
+  .container {
+      max-width: 1120px;
+  }
+  }
+ 
+@media screen and (min-width: 1400px) {
+.container {
+  width: 1300px;
+}
+}
+
+@media screen and (max-width: 640px) {
+    /* .packagesSlider .swiper-slide {
+        width: 70% !important;
+    } */
+    .topDestinationSlides .swiper-slide {
+      width: 100% !important;
+    }
+
+    .mySwiper1 .swiper-slide {
+      width: 100% !important;
+    }
+    .custom-displaynone {
+      display: none !important;
+    }
+}
+
+@media screen and (min-width: 641px) and (max-width: 1080px) {
+    .packagesSlider .swiper-slide {
+        width: 50% !important;
+    }
+    .topDestinationSlides .swiper-slide {
+      width: 50% !important;
+    }
+
+    .mySwiper1 .swiper-slide {
+      width: 50% !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+  .swiper-slide {
+    width: 100% !important;
+}
+  .bg-overlay::after {
+   border-radius: 0px
+  }
+  
+  /* .mySwiper .swiper-slide {
+    width: 30% !important;
+   } */
+   
+  .testimonialSlider .swiper-slide {
+    /* width: 80% !important; */
+    margin-right: 10px;
+  }
+  .wp-block-image img {
+    width: 100% !important;
+}
+.editor-image img {
+  width:100%;
+}
+.custom-css img {
+  height: 300px !important;
+  margin-top: 0px !important;
+  object-fit: contain !important;
+  }
+
+  .floara-editor-table table{
+    display:block;
+  }
+  
+  .floara-editor-table table tr{
+    width:100%;
+    display:block;
+  }
+  
+  .floara-editor-table table tr td{
+    width:100% ! important;
+    display:block;
+  }
+
+  /* .floara-editor-table table td ul li{
+    margin-left: 15px;
+  } */
+}
+@media screen and (min-width: 780px) and (max-width: 801px) {
+  .custom-media-font {
+    font-size: 13px !important;
+  }
+}
+.custom-minHeight {
+  min-height: 250px;
+}
+
+.hideScrolls::-webkit-scrollbar {
+  display: none;
+}
+
+.editor-content p strong {
+  display: block;
+  margin-top: 20px;
+}
+
+.editor-content p strong:nth-child(2) {
+  margin: 0px;
+}
+
+.editor-content ol, .editor-content ul {
+  margin: 1rem;
+}
+
+.zoom-out-effect {
+  transition: transform 0.3s ease-in-out;
+}
+
+.zoom-out-effect:hover {
+  transform: scale(1.1); 
+}
+
+@keyframes loading-bar {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-loading-bar {
+  animation: loading-bar 1.5s linear infinite;
+}
+
+.scrolling-text {
+  white-space: nowrap;
+  /* overflow: hidden; */
+  animation: scroll 10s linear infinite; /* Adjust duration and timing function as needed */
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+::-webkit-scrollbar {
+  height: 4px;
+}
+/* Track (the area where the scrollbar is displayed) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* You can use any color you like */
+}
+
+/* Handle (the draggable part of the scrollbar) */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the thumb */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #0000ff; /* Color on hover */
+}
+
+.custom-border:hover{
+  border: 1px solid red !important;
+}
+.custom-border-active{
+  border: 1px solid red !important;
+}
+.editor-ul ul{
+padding-left: 15px;
+}
+/* //------------BLOG Page Css--------- */
+.custom-css h2 {
+padding-top: 20px;
+}
+
+.custom-css img {
+  margin-top: 20px;
+  width: 100% !important;
+  }
+
+.custom-css figcaption {
+    margin-top: 5px;
+    }
+
+
+.custom-css p:first-child  {
+  margin-top: 20px;
+  }
+
+.custom-css ul li  {
+    margin-bottom: 10px;
+    margin-left: 20px;
+    }
+
+.custom-css ol li{
+  margin-left: 20px;
+}
+
+  /* //------------END BLOG Page Css--------- */
+
+.swiper.packagesSlider {
+      overflow: hidden;
+      }
+.custom-position .swiper-pagination{
+        position: relative;
+        bottom: -5px !important;
+        top: auto !important;
+        } 
+
+.top-d-custom-position .swiper-pagination{
+          position: relative;
+          } 
+
+/* //------------Loader between navigate Page Css--------- */
+.loadingBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: white;
+  z-index: 9999;
+}
+
+.loadingProgress {
+  width: 0;
+  height: 100%;
+  background-color: #0000ff;
+  animation: load 2s infinite;
+}
+
+@keyframes load {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 50%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+img.fr-fir {
+  float: right;
+  width: 80% !important;
+}
+
+img.fr-fil {
+  float: left;
+  width: 80% !important;
+}
+/* --------------------START Remove Flora Editor Name tag css -------------------> */
+p[data-f-id="pbf"] {
+  display: none;
+  }
+/* -------------------------------------END----------------------------------> */
+
+.img-color-pink{
+  filter: brightness(0) saturate(100%) invert(39%) sepia(96%) saturate(2829%) hue-rotate(341deg) brightness(92%) contrast(97%);}
