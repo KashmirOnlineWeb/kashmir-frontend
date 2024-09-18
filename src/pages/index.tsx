@@ -145,12 +145,15 @@ const Index = () => {
 // });
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const seoResponse = await getSeo();
-  const data = seoResponse?.data?.data;
+  //const seoResponse = await getSeo();
+  //const data = seoResponse?.data?.data;
   const metaTags = {
-    metaDescription: data[0]?.meta_description || "",
-    keywords: data[0]?.keywords || "",
-    title: data[0]?.title_tag || "",
+    // metaDescription: data[0]?.meta_description || "",
+    // keywords: data[0]?.keywords || "",
+    // title: data[0]?.title_tag || "",
+    metaDescription: "",
+    keywords: "",
+    title: "Kashmir Online",
   };
 
   return {
