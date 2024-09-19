@@ -1,3 +1,4 @@
+import React from 'react';
 import { Dialog, Transition } from "@headlessui/react";
 import type { NextPage } from "next";
 import Link from "next/link";
@@ -43,8 +44,8 @@ const Header: NextPage = () => {
   const [direction, setDirection] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [destinations, setDestinations] = useState({});
-  const [religiousDestinations, setReligiousDestinations] = useState({});
-  const [topDestinations, setTopDestinations] = useState({});
+  const [religiousDestinations, setReligiousDestinations] = useState<any[]>([]);
+  const [topDestinations, setTopDestinations] = useState<any[]>([]);
 
   const authContext = useAuth();
   //console.log("authContext ", authContext);
@@ -386,7 +387,7 @@ const Header: NextPage = () => {
                   onMouseLeave={() => setisShow(false)}
                 >
                   <ul className="px-0" role="none">
-                    {topDestinations && topDestinations.map((destination: { slug: string; label: string; }, index: Key | null | undefined) => (
+                    {topDestinations && topDestinations.map((destination: { slug: string; label: string; }, index: React.Key | null | undefined) => (
                       <li key={index} className='list-none hover:bg-gray-100'>
                         <a
                           role="menuitem"
@@ -466,7 +467,7 @@ const Header: NextPage = () => {
                 >
                   
                   <ul className="px-0" role="none">
-                    {religiousDestinations.length > 0 && religiousDestinations.map((destination: { slug: string; label: string; }, index: Key | null | undefined) => (
+                    {religiousDestinations.length > 0 && religiousDestinations.map((destination: { slug: string; label: string; }, index: React.Key | null | undefined) => (
                       <li key={index} className='list-none hover:bg-gray-100'>
                         <a
                           role="menuitem"

@@ -16,7 +16,7 @@ type Hotel1pack1Type = {
     amenities4?: string;
     amenities?: string;
     hotelText?: string | undefined;
-    breakfast?: boolean;
+    breakfast?: any;
     property1pack2Position?: CSSProperties['position'];
     property1pack2ZIndex?: CSSProperties['zIndex'];
     lgClass?: string;

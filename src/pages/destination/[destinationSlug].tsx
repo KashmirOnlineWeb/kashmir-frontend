@@ -36,7 +36,7 @@ const Destination: NextPage<DestinationProps> = () => {
   const [showLoader, setShowLoader] = useState(true)
   const [parseSingleCityBestTimeToVisit, setParseSingleCityBestTimeToVisit] = useState<CityBestTimeToVisit[] | null>(null);
   const [parseGalleryText, setParseGalleryText] = useState([])
-  const [destination, setDestination] = useState({});
+  const [destination, setDestination] = useState<any>({});
   // Check if router.asPath is defined before splitting
   const lastSegment = router.query.destinationSlug; // Access dynamic route parameter
   const dispatch = useDispatch()
@@ -90,7 +90,7 @@ const Destination: NextPage<DestinationProps> = () => {
   return (
     <div className="w-full overflow-hidden bg-default-white text-left font-others-capitalised text-sm text-default-white  sm:px-4 lg:px-0">
       <Header />
-      <ImageGallery images={destination.image_gallery || []} />
+      <ImageGallery images={destination?.image_gallery || []} />
       {destination && <Navigation trueProp={true} />}
       {showLoader ? <PageWithLoaders prop={propLoaderValue} /> :
         <>

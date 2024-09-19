@@ -180,10 +180,17 @@ export interface DestinationResponse {
     hotel: HotelItem[];
     sightseeing: SightSeeingItem[];
     houseboats: HouseBoatItem[];
-    hospitals: HospitalItem[];
-    pharmacies: PharmacyItem[];
+    //hospitals: HospitalItem[];
+    //pharmacies: PharmacyItem[];
     shoppingplaces: ShoppingPlaceItem[];
     collagesandschools: CollegeAndSchoolItem[];
     thingstobenoted: ThingsToBeNotedItem[];
-    restourants: RestaurantItem[];
+    //restaurants: RestaurantItem[];
+    other_data: any;
+    hotels: any;
+    shopping_places: any;
+    collages_and_schools: any;
+    restaurants: any;
+    hospitals: any;
+    pharmacies: any;
 }

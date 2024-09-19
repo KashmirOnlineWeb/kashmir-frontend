@@ -107,7 +107,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const metaTags = {
         metaDescription: data?.other_data?.meta_description || "",
         keywords: data?.other_data?.meta_keywords || "",
-        title: data?.other_data?.meta_title || `${city.charAt(0).toUpperCase() + city.slice(1)} Colleges and School`,
+        title: typeof city === 'string' 
+            ? data?.other_data?.meta_title || `${city.charAt(0).toUpperCase() + city.slice(1)} Colleges and School`
+            : "Colleges and School",
     };
 
     return {

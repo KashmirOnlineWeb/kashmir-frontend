@@ -7,7 +7,7 @@ import PageWithLoaders from "./loader";
 import Tooltip from '@mui/material/Tooltip';
 
 interface ImageGalleryProps {
-    images?: { file: string, alt: string, title: string, description: string }[];
+    images?: { file: string, alt: string, title: string, description: string }[] | string;
 }
 
 const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
