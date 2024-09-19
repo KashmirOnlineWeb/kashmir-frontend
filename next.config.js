@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  swcMinify: false, // Added this line
   async rewrites() {
     return [
       {
