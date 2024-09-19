@@ -14,12 +14,12 @@ const ImageRightPlacement: NextPage<imageRightType> = ({ parseContentState, hasI
                 <div className="flex flex-col w-full items-start justify-start">
                     <b className="relative flex w-full items-center leading-[40px]">
                         <span className="w-full">
-                            <p className="m-0 text-[#E74433] leading-[40px] sm:hoverUnderline text-[24px] sm:text-[28px]">{parseContentState?.repeater_title}</p>
+                            <p className="m-0 text-[#E74433] leading-[40px] sm:hoverUnderline text-[24px] sm:text-[28px]">{parseContentState?.title}</p>
                             {/* <p className="m-0 color--wedge">{subtitle}</p> */}
                         </span>
                     </b>
                     {
-                        parseContentState?.repeater_content ? <div dangerouslySetInnerHTML={{ __html: parseContentState?.repeater_content }} className={` relative floara-editor-table floara-editor-ml-0 items-center text-base leading-[26px]`} />
+                        parseContentState?.content ? <div dangerouslySetInnerHTML={{ __html: parseContentState?.content }} className={` relative floara-editor-table floara-editor-ml-0 items-center text-base leading-[26px]`} />
                             : ''
                     }
                 </div>
@@ -30,7 +30,7 @@ const ImageRightPlacement: NextPage<imageRightType> = ({ parseContentState, hasI
                         transition={{ duration: 0.3, ease: 'easeInOut' }}
                         className="relative sm:h-[350px] sm:w-[530px] w-full shrink-0 overflow-hidden sm:object-cover h-[245.66px]"
                         alt=""
-                        src={parseContentState?.repeater_image}
+                        src={process.env.NEXT_PUBLIC_IMAGE_PREFIX + parseContentState?.file}
                     />}
             </div>
 

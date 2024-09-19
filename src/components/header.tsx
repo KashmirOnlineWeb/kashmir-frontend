@@ -466,7 +466,7 @@ const Header: NextPage = () => {
                 >
                   
                   <ul className="px-0" role="none">
-                    {religiousDestinations  && religiousDestinations.map((destination: { slug: string; label: string; }, index: Key | null | undefined) => (
+                    {religiousDestinations.length > 0 && religiousDestinations.map((destination: { slug: string; label: string; }, index: Key | null | undefined) => (
                       <li key={index} className='list-none hover:bg-gray-100'>
                         <a
                           role="menuitem"

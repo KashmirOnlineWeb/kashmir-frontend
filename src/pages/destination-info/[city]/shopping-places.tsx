@@ -34,7 +34,7 @@ const ShoppingPlaces: NextPage<ShoppingPlacesProps> = () => {
     useEffect(() => {
         const FetchData = async () => {
             if (discoverPage?.length == 0) {
-                const discoverResponse = await DiscoverApi(city)
+                const discoverResponse = await DiscoverApi('shoppingplace/' + city)
                 setDiscoverData(discoverResponse?.data);
                 setShowLoader(false)
                 dispatch(getDiscoverData(discoverResponse?.data))
@@ -54,20 +54,20 @@ const ShoppingPlaces: NextPage<ShoppingPlacesProps> = () => {
                 <DestinationSectionTitle
                     topTitle="Shopping places"
                     viewAllDisable={false}
-                    topSubTitle={discoverData?.shoppingplaces?.map(((val) => val?.sub_title))}
+                    topSubTitle={discoverData?.shopping_places?.title}
                 />
                 {showLoader ? <PageWithLoaders prop={propLoaderValue} /> :
                     <>
-                        {discoverData?.shoppingplaces?.map((data: any, index: any) => (
-                            <div key={index}>
+                        {/* {discoverData?.shopping_places.repeater_content?.map((data: any, index: any) => ( */}
+                            <div>
                                 <BackgroundPage
-                                    title={data?.title}
+                                    title={discoverData?.shopping_places?.title}
                                     subtitle=""
-                                    content={data?.repeater_mergeAll}
+                                    content={discoverData?.shopping_places?.repeater_content}
                                     imageSrc="/assets/images/package/package.webp"
                                 />
                             </div>
-                        ))}
+                        {/* ))} */}
                     </>
                 }
             </div>
@@ -78,13 +78,13 @@ const ShoppingPlaces: NextPage<ShoppingPlacesProps> = () => {
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const { city } = context.query;
-    const DiscoverApiRes = await DiscoverApi(city);
-    const data = DiscoverApiRes?.data?.shoppingplaces;
+    const DiscoverApiRes = await DiscoverApi('shoppingplace/' + city);
+    const data = DiscoverApiRes?.data;
 
     const metaTags = {
-        metaDescription: data[0]?.meta_description || "",
-        keywords: data[0]?.keywords || "",
-        title: data[0]?.title || "",
+        metaDescription: data?.shopping_places?.meta?.meta_description || "",
+        keywords: data?.shopping_places?.meta?.meta_keywords || "",
+        title: data?.shopping_places?.meta?.meta_title || `${city.charAt(0).toUpperCase() + city.slice(1)} Shopping Places`,
     };
 
     return {

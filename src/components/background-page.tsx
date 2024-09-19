@@ -31,11 +31,11 @@ const BackgroundPage: NextPage<BackgroundPageType> = ({
             {parseContentState &&
                 parseContentState.map((data: any, index: any) => (
                     <div key={index}>
-                        {data?.repeater_placement_dropdown == "Right"
+                        {data?.imagePosition == "right"
                             ?
-                            <ImageRightPlacement parseContentState={data} hasImage={data?.repeater_has_dropdown} />
+                            <ImageRightPlacement parseContentState={data} hasImage={data?.showImage} />
                             :
-                            <ImageLeftPlacement parseContentState={data} hasImage={data?.repeater_has_dropdown} />}
+                            <ImageLeftPlacement parseContentState={data} hasImage={data?.showImage} />}
                     </div>
                 ))
             }
