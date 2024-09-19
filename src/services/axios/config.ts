@@ -6,7 +6,8 @@ const Api = axios.create({
     // baseURL: "https://itsupport.co.in/api/v1",
     // baseURL: "http://localhost:4000/api/v1"
     //baseURL: "https://itsupport.co.in/api/v1",
-    baseURL: "http://kashmir-backend.test/api",
+    //baseURL: "http://kashmir-backend.test/api",
+    baseURL: process.env.NEXT_BACKEND_API_PREFIX,
 
 });
 
