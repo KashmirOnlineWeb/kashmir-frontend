@@ -102,9 +102,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const data = DiscoverApiRes?.data;
 
     const metaTags = {
-        metaDescription: data?.meta_description || "",
-        keywords: data?.keywords || "",
-        title: data?.title || `${city.charAt(0).toUpperCase() + city.slice(1)} Hotels`,
+        metaDescription: data?.other_data?.meta_description || "",
+        keywords: data?.other_data?.meta_keywords || "",
+        title: data?.other_data?.meta_title || `${city.charAt(0).toUpperCase() + city.slice(1)} Hotels`,
     };
 
     return {

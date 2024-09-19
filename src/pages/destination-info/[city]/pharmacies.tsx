@@ -34,7 +34,7 @@ const Pharmacies: NextPage<Pharmaciestypes> = ({ isPackage, lgClass, isHotel }) 
     useEffect(() => {
         const FetchData = async () => {
             if (discoverPage?.length == 0) {
-                const discoverResponse = await DiscoverApi(city)
+                const discoverResponse = await DiscoverApi('pharmacy/'+ city)
                 setDiscoverData(discoverResponse?.data);
                 setShowLoader(false)
                 dispatch(getDiscoverData(discoverResponse?.data))
@@ -49,7 +49,7 @@ const Pharmacies: NextPage<Pharmaciestypes> = ({ isPackage, lgClass, isHotel }) 
     useEffect(() => {
         // Assuming discoverData?.pharmacies is an array of stringified JSON objects
         if (discoverData?.pharmacies) {
-            const parsedPharmacies = discoverData?.pharmacies?.map((data: any) => JSON.parse(data?.pharmacies_content));
+            const parsedPharmacies = discoverData?.pharmacies?.map((data: any) => (data?.pharmacies_content));
             setPharmaciesContent(parsedPharmacies[0]);
         }
     }, [discoverData]);
@@ -62,7 +62,7 @@ const Pharmacies: NextPage<Pharmaciestypes> = ({ isPackage, lgClass, isHotel }) 
                 <DestinationSectionTitle
                     topTitle="Pharmacies"
                     viewAllDisable={false}
-                    topSubTitle={discoverData?.pharmacies?.map((val=> val?.sub_title))}
+                    topSubTitle={discoverData?.other_data?.title}
                 />
             </div>
             {showLoader ? <PageWithLoaders prop={propLoaderValue} /> :
@@ -70,7 +70,7 @@ const Pharmacies: NextPage<Pharmaciestypes> = ({ isPackage, lgClass, isHotel }) 
                     <div className=" w-full overflow-hidden bg-default-white text-left font-others-capitalised text-sm text-default-white">
                         <div className="container w-auto mx-auto pb-20 px-4">
                             <div className="self-stretch grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start justify-start gap-[24px]">
-                                {pharmaciesContent?.map((data: any, index: any) => (
+                                {discoverData?.pharmacies?.map((data: any, index: any) => (
                                     <div key={data?.id || index}>
                                         <Restourants1pack1
                                             // frame95={data?.repeater_image}
@@ -79,7 +79,7 @@ const Pharmacies: NextPage<Pharmaciestypes> = ({ isPackage, lgClass, isHotel }) 
                                             restourantName={data?.name}
                                             location={data?.google_map}
                                             // cityName="Anantnag"
-                                            address={data?.address}
+                                            address={data?.location}
                                             workinghours={data?.working_hours}
                                             contact={data?.contact}
                                             lgClass={lgClass}
@@ -100,13 +100,13 @@ const Pharmacies: NextPage<Pharmaciestypes> = ({ isPackage, lgClass, isHotel }) 
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const { city } = context.query;
-    const DiscoverApiRes = await DiscoverApi(city);
-    const data = DiscoverApiRes?.data.pharmacies;
+    const DiscoverApiRes = await DiscoverApi('pharmacy/'+city);
+    const data = DiscoverApiRes?.data;
 
     const metaTags = {
-        metaDescription: data[0]?.meta_description || "",
-        keywords: data[0]?.keywords || "",
-        title: data[0]?.title || "",
+        metaDescription: data?.other_data?.meta_description || "",
+        keywords: data?.other_data?.meta_keywords || "",
+        title: data?.other_data?.meta_title || `${city.charAt(0).toUpperCase() + city.slice(1)} Pharmacies`,
     };
 
     return {
