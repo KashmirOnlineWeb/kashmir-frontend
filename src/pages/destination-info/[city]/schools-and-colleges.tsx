@@ -69,7 +69,7 @@ const SchoolsAndCollages: NextPage<SchoolsAndCollagesstypes> = ({ isPackage, lgC
                     {showLoader ? <PageWithLoaders prop={propLoaderValue} /> :
                         <>
                             <div className="self-stretch grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start justify-start gap-[24px]">
-                                {discoverData.collages && discoverData.collages?.map((data: any, index: any) => (
+                                {discoverData?.collages && discoverData?.collages?.map((data: any, index: any) => (
                                     <div key={data.id || index}>
                                         <Restourants1pack1
                                             // frame95={data?.repeater_image}
