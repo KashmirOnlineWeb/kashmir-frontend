@@ -39,7 +39,7 @@ const AllRestaurants: NextPage<AllRestorentstypes> = ({ isPackage, isHotel }) =>
     useEffect(() => {
         const FetchData = async () => {
             if (discoverPage?.length == 0) {
-                const discoverResponse = await DiscoverApi(city)
+                const discoverResponse = await DiscoverApi('restaurant/' + city)
                 setDiscoverData(discoverResponse?.data);
                 setShowLoader(false)
                 dispatch(getDiscoverData(discoverResponse?.data))
@@ -51,17 +51,17 @@ const AllRestaurants: NextPage<AllRestorentstypes> = ({ isPackage, isHotel }) =>
         FetchData();
     }, [dispatch, city]);
 
-    useEffect(() => {
-        if (discoverData?.restourants) {
-            const parsedRestaurantContent = discoverData?.restourants?.map((data: any) => (data?.restourant_content));
-            const mapParsed = parsedRestaurantContent?.map((value: any) => {
-                if (value.length > 0) {
-                    return JSON.parse(value)
-                }
-            })
-            setParseRestaurantContent(mapParsed[0]);
-        }
-    }, [discoverData]);
+    // useEffect(() => {
+    //     if (discoverData?.restourants) {
+    //         const parsedRestaurantContent = discoverData?.restourants?.map((data: any) => (data?.restourant_content));
+    //         const mapParsed = parsedRestaurantContent?.map((value: any) => {
+    //             if (value.length > 0) {
+    //                 return JSON.parse(value)
+    //             }
+    //         })
+    //         setParseRestaurantContent(mapParsed[0]);
+    //     }
+    // }, [discoverData]);
     return (
         <>
             <div className=" w-full mt-5 overflow-hidden bg-default-white text-left font-others-capitalised text-sm text-default-white">
@@ -69,21 +69,16 @@ const AllRestaurants: NextPage<AllRestorentstypes> = ({ isPackage, isHotel }) =>
                     {showLoader ? <PageWithLoaders prop={propLoaderValue} /> :
                         <>
                             <div className="self-stretch grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start justify-start gap-[24px]">
-                                {parseRestaurantContent?.map((item: any, index: any) => (
+                                {discoverData?.restaurants?.map((item: any, index: any) => (
                                     <RestourantCard key={index}
-                                        // frame95={item?.repeater_image}
                                         property1pack2Position="unset"
                                         property1pack2ZIndex="0"
-                                        restourantName={item?.restourants_name}
-                                        // cityName="Anantnag"
-                                        amenities1="Sightseeing"
-                                        amenities2="Hotel"
-                                        amenities3="Transport"
+                                        restourantName={item?.name}
                                         contact={item?.contact}
                                         location={item?.google_map}
                                         address={item?.address}
                                         websiteUrl={item?.website_url}
-                                        pacakgeText={removeBrTags(item?.content)}
+                                        pacakgeText={removeBrTags(item?.description	)}
                                         lgClass="md:w-full lg:w-full"
                                         restaurantProp={true}
                                     />

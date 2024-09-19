@@ -28,7 +28,7 @@ const Package: NextPage<restaurantProps> = () => {
   useEffect(() => {
     const FetchData = async () => {
       if (discoverPage?.length == 0) {
-        const discoverResponse = await DiscoverApi(city)
+        const discoverResponse = await DiscoverApi('restaurant/' + city)
         setDiscoverData(discoverResponse?.data);
         dispatch(getDiscoverData(discoverResponse?.data))
       } else {
@@ -47,9 +47,7 @@ const Package: NextPage<restaurantProps> = () => {
           <DestinationSectionTitle
             topTitle="Restaurants"
             viewAllDisable={false}
-            topSubTitle={discoverData?.restourants?.map(((val: {
-              sub_title: any; title: any;
-            }) => val?.sub_title))}
+            topSubTitle={discoverData?.other_data?.title}
           />
         </div>
         <AllRestaurants />
@@ -61,12 +59,12 @@ const Package: NextPage<restaurantProps> = () => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { city } = context.query;
-  const DiscoverApiRes = await DiscoverApi(city);
-  const data = DiscoverApiRes?.data?.restourants;
+  const DiscoverApiRes = await DiscoverApi('restaurant/' + city);
+  const data = DiscoverApiRes?.data;
   const metaTags = {
-    metaDescription: data[0]?.meta_description || "",
-    keywords: data[0]?.keywords || "",
-    title: data[0]?.title_tag || "",
+    metaDescription: data?.other_data?.meta_description || "",
+    keywords: data?.other_data?.meta_keywords || "",
+    title: data?.other_data?.meta_title || `${city.charAt(0).toUpperCase() + city.slice(1)} Restaurants`,
   };
   return {
     props: {
