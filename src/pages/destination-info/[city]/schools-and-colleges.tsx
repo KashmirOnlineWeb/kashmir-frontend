@@ -34,7 +34,7 @@ const SchoolsAndCollages: NextPage<SchoolsAndCollagesstypes> = ({ isPackage, lgC
     useEffect(() => {
         const FetchData = async () => {
             if (discoverPage?.length == 0) {
-                const discoverResponse = await DiscoverApi(city)
+                const discoverResponse = await DiscoverApi('collage/' + city)
                 setDiscoverData(discoverResponse?.data);
                 setShowLoader(false)
                 dispatch(getDiscoverData(discoverResponse?.data))
@@ -61,7 +61,7 @@ const SchoolsAndCollages: NextPage<SchoolsAndCollagesstypes> = ({ isPackage, lgC
                 <DestinationSectionTitle
                     topTitle="Colleges and School"
                     viewAllDisable={false}
-                    topSubTitle={discoverData?.collagesandschools?.map(((val: any) => val?.sub_title))}
+                    topSubTitle={discoverData?.other_data?.title}
                 />
             </div>
             <div className=" w-full overflow-hidden bg-default-white text-left font-others-capitalised text-sm text-default-white">
@@ -69,7 +69,7 @@ const SchoolsAndCollages: NextPage<SchoolsAndCollagesstypes> = ({ isPackage, lgC
                     {showLoader ? <PageWithLoaders prop={propLoaderValue} /> :
                         <>
                             <div className="self-stretch grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start justify-start gap-[24px]">
-                                {collagesAndSchoolsParsedState && collagesAndSchoolsParsedState?.map((data: any, index: any) => (
+                                {discoverData.collages && discoverData.collages?.map((data: any, index: any) => (
                                     <div key={data.id || index}>
                                         <Restourants1pack1
                                             // frame95={data?.repeater_image}
@@ -101,13 +101,13 @@ const SchoolsAndCollages: NextPage<SchoolsAndCollagesstypes> = ({ isPackage, lgC
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const { city } = context.query;
-    const DiscoverApiRes = await DiscoverApi(city);
-    const data = DiscoverApiRes?.data?.collagesandschools;
+    const DiscoverApiRes = await DiscoverApi('collage/' + city);
+    const data = DiscoverApiRes?.data;
 
     const metaTags = {
-        metaDescription: data[0]?.meta_description || "",
-        keywords: data[0]?.keywords || "",
-        title: data[0]?.title || "",
+        metaDescription: data?.other_data?.meta_description || "",
+        keywords: data?.other_data?.meta_keywords || "",
+        title: data?.other_data?.meta_title || `${city.charAt(0).toUpperCase() + city.slice(1)} Colleges and School`,
     };
 
     return {

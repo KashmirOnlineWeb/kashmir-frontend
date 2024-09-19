@@ -32,7 +32,7 @@ const Hospitals: NextPage<HospitalMetaTagsProps> = () => {
     useEffect(() => {
         const FetchData = async () => {
             if (discoverPage?.length == 0) {
-                const discoverResponse = await DiscoverApi(city)
+                const discoverResponse = await DiscoverApi('hospital/' + city)
                 setDiscoverData(discoverResponse?.data);
                 setShowLoader(false)
                 dispatch(getDiscoverData(discoverResponse?.data))
@@ -45,7 +45,7 @@ const Hospitals: NextPage<HospitalMetaTagsProps> = () => {
     }, [dispatch, city]);
     useEffect(() => {
         if (discoverData?.hospitals !== undefined) {
-            const parsedHospitalContent = discoverData?.hospitals?.[0]?.hospital_content?.map((data: any) => JSON.parse(data));
+            const parsedHospitalContent = discoverData?.hospitals.map((data: any) => (data));
             setHospitalParseData(parsedHospitalContent[0]);
         }
     }, [discoverData]);
@@ -58,13 +58,13 @@ const Hospitals: NextPage<HospitalMetaTagsProps> = () => {
                 <DestinationSectionTitle
                     topTitle="Hospitals"
                     viewAllDisable={false}
-                    topSubTitle={discoverData?.hospitals?.map((val => val?.sub_title))}
+                    topSubTitle={discoverData?.other_data?.title}
                 // topSubTitle="A Spiritual Journey: Exploring the Enchancing Religous Places of Kashmir"
                 />
                 {showLoader ? <PageWithLoaders prop={propLoaderValue} /> :
                     <>
                         <div className="self-stretch grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start justify-start gap-[24px]">
-                            {hospitalParseData?.map((data: any, index: any) => (
+                            {discoverData?.hospitals?.map((data: any, index: any) => (
                                 <div key={data?.id || index}>
                                     <HospitalCardComponent
                                         hospitalName={data?.name}
@@ -72,6 +72,12 @@ const Hospitals: NextPage<HospitalMetaTagsProps> = () => {
                                         contact={data?.contact}
                                         content={data?.content}
                                         description={data?.description}
+                                        howtoreach={data?.howtoreach}
+                                        facilities={data?.facilities}
+                                        introduction={data?.introduction}
+                                        referralsystem={data?.referral_system}
+                                        traumaservices={data?.trauma_services}
+                                        googlemap={data?.google_map}
                                     />
                                 </div>
                             ))}
@@ -87,13 +93,13 @@ const Hospitals: NextPage<HospitalMetaTagsProps> = () => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const { city } = context.query;
-    const DiscoverApiRes = await DiscoverApi(city);
-    const data = DiscoverApiRes?.data.hospitals;
+    const DiscoverApiRes = await DiscoverApi('hospital/' + city);
+    const data = DiscoverApiRes?.data;
 
     const metaTags = {
-        metaDescription: data[0]?.meta_description || "",
-        keywords: data[0]?.keywords || "",
-        title: data[0]?.title || "",
+        metaDescription: data?.other_data?.meta_description || "",
+        keywords: data?.other_data?.meta_keywords || "",
+        title: data?.other_data?.meta_title || `${city.charAt(0).toUpperCase() + city.slice(1)} Hospitals`,
     };
 
     return {

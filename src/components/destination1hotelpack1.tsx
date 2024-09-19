@@ -14,6 +14,7 @@ type Hotel1pack1Type = {
     amenities2?: string;
     amenities3?: string;
     amenities4?: string;
+    amenities?: string;
     hotelText?: string | undefined;
     breakfast?: boolean;
     property1pack2Position?: CSSProperties['position'];
@@ -35,6 +36,7 @@ const Hotel1pack1: NextPage<Hotel1pack1Type> = ({
     amenities1,
     amenities2,
     amenities3,
+    amenities,
     breakfast,
     star,
     contact,
@@ -52,6 +54,18 @@ const Hotel1pack1: NextPage<Hotel1pack1Type> = ({
             zIndex: property1pack2ZIndex,
         };
     }, [property1pack2Position, property1pack2ZIndex]);
+
+    const capitalizeFirstLetter = (string: string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };
+
+    const amenitiesArray = useMemo(() => {
+        if (typeof amenities === 'string' && amenities.trim()) {
+            // Remove brackets and quotes, then split and trim each item
+            return amenities.replace(/[\[\]"]/g, '').split(',').map(item => item.trim());
+        }
+        return [];
+    }, [amenities]);
 
     return (
         <>
@@ -82,19 +96,11 @@ const Hotel1pack1: NextPage<Hotel1pack1Type> = ({
                     </div>
                     <div className="flex flex-col items-start justify-start gap-[8px] text-sm text-text-gray-700">
                         <div className="flex flex-row flex-wrap items-center justify-start sm:gap-[12px] gap-[8px] md:gap-[5px] lg:gap-[5px]">
-                            <div className="relative font-medium leading-[24px] text-[14px]">
-                                {amenities1}
-                            </div>
-                            <div className="relative h-[3px] w-[3px] rounded-[50%] bg-gainsboro" />
-                            <div className="relative font-medium leading-[24px] text-[14px]">
-                                {' '}
-                                {amenities2}
-                            </div>
-                            <div className="relative h-[3px] w-[3px] rounded-[50%] bg-gainsboro" />
-                            <div className="relative font-medium leading-[24px] text-[14px]">
-                                {' '}
-                                {amenities3}
-                            </div>
+                            {amenitiesArray.map((amenity, index) => (
+                                <div key={index} className="relative font-medium leading-[24px] text-[14px]">
+                                    {capitalizeFirstLetter(amenity)}
+                                </div>
+                            ))}
                         </div>
                     </div>
 
@@ -120,7 +126,11 @@ const Hotel1pack1: NextPage<Hotel1pack1Type> = ({
                     <div className="self-stretch flex flex-row items-center justify-start gap-[17px] bg-[#EBEBEB80]">
                         <div className="flex-1 relative text-gray-500 leading-[22px] font-medium">
                             Breakfast
-                            <div className='text-black'>{breakfast ? "Breakfast available" : "Breakfast available at extra charges"}</div>
+                            <div className='text-black'>
+                                {breakfast === 0 ? "Breakfast Not Available" : 
+                                 breakfast === 1 ? "Breakfast Available" : 
+                                 breakfast === 2 ? "Breakfast available at extra charges" : ""}
+                            </div>
                         </div>
                         <div className="rounded-full bg-red-600 flex flex-row w-8 h-8 items-center justify-center box-border p-2">
                             <PackageIcon

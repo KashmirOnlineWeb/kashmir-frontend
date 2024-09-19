@@ -10,13 +10,24 @@ type HospitalCardComponentTypes = {
     contact?: any
     description?: any
     content?: any
+    howtoreach?: any
+    facilities?: any
+    introduction?: any
+    referralsystem?: any
+    traumaservices?: any
+    googlemap?: any
 }
 
 const HospitalCardComponent: NextPage<HospitalCardComponentTypes> = ({ hospitalName,
     address,
     contact,
     description,
-    content }) => {
+    content,
+    facilities,
+    introduction,
+    referralsystem,
+    traumaservices,
+    googlemap }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
 
@@ -112,6 +123,14 @@ const HospitalCardComponent: NextPage<HospitalCardComponentTypes> = ({ hospitalN
                             {/* Scrollable Content */}
                             <div className="overflow-y-auto h-full">
                                 <HospitalDescription hospitalData={content} imageSrc="/assets/images/package/package.webp" />
+                                <HospitalDescription hospitalData={facilities} imageSrc="/assets/images/package/package.webp" />
+                                <HospitalDescription hospitalData={introduction} imageSrc="/assets/images/package/package.webp" />
+                                <HospitalDescription hospitalData={referralsystem} imageSrc="/assets/images/package/package.webp" />
+                                <HospitalDescription hospitalData={traumaservices} imageSrc="/assets/images/package/package.webp" />
+                                <HospitalDescription hospitalData={googlemap} imageSrc="/assets/images/package/package.webp" />
+                            </div>
+                            <div className="overflow-y-auto h-full">
+                                
                             </div>
 
                             {/* Close Button (duplicate for bottom) */}

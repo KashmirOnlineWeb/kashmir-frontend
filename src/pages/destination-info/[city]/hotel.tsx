@@ -33,7 +33,7 @@ const Hotel: NextPage<Hoteltypes> = ({ isPackage, lgClass, isHotel }) => {
     useEffect(() => {
         const FetchData = async () => {
             if (discoverPage?.length == 0) {
-                const discoverResponse = await DiscoverApi(city)
+                const discoverResponse = await DiscoverApi('hotel/' + city)
                 setDiscoverData(discoverResponse?.data);
                 setShowLoader(false)
                 dispatch(getDiscoverData(discoverResponse?.data))
@@ -53,7 +53,7 @@ const Hotel: NextPage<Hoteltypes> = ({ isPackage, lgClass, isHotel }) => {
                 <DestinationSectionTitle
                     topTitle="Hotel"
                     viewAllDisable={false}
-                    topSubTitle={discoverData?.hotel?.map((val => val?.sub_title))}
+                    topSubTitle={discoverData?.other_data?.title}
                 // topSubTitle="A Spiritual Journey: Exploring the Enchancing Religous Places of Kashmir"
                 />
             </div>
@@ -62,14 +62,15 @@ const Hotel: NextPage<Hoteltypes> = ({ isPackage, lgClass, isHotel }) => {
                     <div className=" w-full overflow-hidden bg-default-white text-left font-others-capitalised text-sm text-default-white">
                         <div className="container lg:mt-5 w-auto mx-auto pb-20 px-4">
                             <div className="self-stretch grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start justify-start gap-[24px]">
-                                {discoverData?.hotel?.map((data: any, index: any) => (
+                                {discoverData?.hotels?.map((data: any, index: any) => (
                                     <div key={data.id || index}>
                                         <Hotel1pack1
-                                            frame95={data?.imageURL}
+                                            frame95={process.env.NEXT_PUBLIC_IMAGE_PREFIX + data?.image}
                                             property1pack2Position="unset"
                                             property1pack2ZIndex="0"
-                                            hotelName={data?.hotel_name}
+                                            hotelName={data?.name}
                                             // cityName="Anantnag"
+                                            amenities={data?.amenities}
                                             amenities1="Sightseeing"
                                             amenities2="Hotel"
                                             amenities3="Transport"
@@ -97,13 +98,13 @@ const Hotel: NextPage<Hoteltypes> = ({ isPackage, lgClass, isHotel }) => {
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const { city } = context.query;
-    const DiscoverApiRes = await DiscoverApi(city);
-    const data = DiscoverApiRes?.data.hotel;
+    const DiscoverApiRes = await DiscoverApi('hotel/' + city);
+    const data = DiscoverApiRes?.data;
 
     const metaTags = {
-        metaDescription: data[0]?.meta_description || "",
-        keywords: data[0]?.keywords || "",
-        title: data[0]?.title || "",
+        metaDescription: data?.meta_description || "",
+        keywords: data?.keywords || "",
+        title: data?.title || `${city.charAt(0).toUpperCase() + city.slice(1)} Hotels`,
     };
 
     return {
