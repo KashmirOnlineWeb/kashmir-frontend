@@ -58,10 +58,7 @@ const Header: NextPage = () => {
     const FetchData = async () => {
       try {
         const data = await getAllDestinations();
-        if (!data) {
-          throw new Error("No data received from API");
-        }
-
+        
         const topDestinations = data
           .filter((destination: any) => destination.destination_type === 1)
           .map((destination: any) => ({
